@@ -1,0 +1,9 @@
+pre-push:
+  jobs:
+    - run: npm run lint
+
+pre-commit:
+  parallel: true
+  jobs:
+    - run: npm run fix -- {staged_files}
+    - run: npm run typecheck
