@@ -3,9 +3,22 @@ import heroImg from "./assets/hero.png";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import "./App.css";
+import z from "zod";
+import { useEncryptedData } from "./hooks/useEncryptedData";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 function App() {
   const [count, setCount] = useState(0);
+
+  const [password, _setPassword] = useLocalStorage(
+    z.string().nullable(),
+    "password",
+    null,
+  );
+  const { data, error } = useEncryptedData("/data.json.enc", password || "");
+
+  console.log("Decrypted data:", data);
+  console.error("Error:", error);
 
   return (
     <>

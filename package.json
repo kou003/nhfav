@@ -11,11 +11,14 @@
     "check": "biome check",
     "fix": "biome check --write",
     "fix:unsafe": "biome check --write --unsafe",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "update": "tsx --env-file-if-exists .env scripts/update.ts",
+    "check-data": "tsx --env-file-if-exists .env scripts/check.ts"
   },
   "dependencies": {
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-dom": "^19.2.5",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
@@ -28,6 +31,7 @@
     "@vitejs/plugin-react": "^6.0.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "globals": "^17.5.0",
+    "tsx": "^4.21.0",
     "typescript": "~6.0.2",
     "vite": "^8.0.9"
   }
