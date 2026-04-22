@@ -1,18 +1,32 @@
-import { type DataList, dataResponseSchema } from "../src/types/data";
+import {
+  type DataList,
+  dataResponseSchema,
+  dataSchema,
+} from "../src/types/data";
 import { env } from "./env";
-import { delay, loadDataList, saveDataList } from "./utils";
+import { delay, loadData, saveData } from "./utils";
 
-const { PASSWORD, API_KEY, ENDPOINT, DATA_PATH, WAIT_MS } = env;
+const {
+  PASSWORD,
+  API_KEY,
+  API_ENDPOINT,
+  MAIN_ORIGIN,
+  THUMBNAIL_ORIGINS,
+  DATA_PATH,
+  WAIT_MS,
+} = env;
 
 async function main() {
-  const prevDataList = loadDataList(DATA_PATH, PASSWORD);
-  const existIds = new Set(prevDataList.map((item) => item.id));
+  const prevData =
+    dataSchema.safeParse(loadData(DATA_PATH, PASSWORD)).data ??
+    dataSchema.parse({});
+  const existIds = new Set(prevData.items.map((item) => item.id));
 
-  const nextDataList: DataList = [];
+  const nextItems: DataList = [];
 
   let page = 1;
   while (true) {
-    const url = `${ENDPOINT}?page=${page}`;
+    const url = `${API_ENDPOINT}?page=${page}`;
     const response = await fetch(url, {
       headers: {
         Accept: "application/json",
@@ -38,6 +52,8 @@ async function main() {
 
     const data = dataResponseSchema.parse(await response.json());
 
+    console.log(`Fetched page ${page} with ${data.result.length} items.`);
+
     if (data.result.length === 0) {
       console.log("No more data to fetch.");
       break;
@@ -45,11 +61,11 @@ async function main() {
 
     let existFound = false;
     for (const item of data.result) {
-      if (!existIds.has(item.id)) {
-        nextDataList.push(item);
-      } else {
+      if (existIds.has(item.id)) {
         existFound = true;
         break;
+      } else {
+        nextItems.push(item);
       }
     }
     if (existFound) {
@@ -57,15 +73,18 @@ async function main() {
       break;
     }
 
-    console.log(`Fetched page ${page} with ${data.result.length} items.`);
     page++;
 
     await delay(WAIT_MS); // Wait before the next request
   }
 
-  nextDataList.push(...prevDataList);
+  nextItems.push(...prevData.items);
 
-  saveDataList(DATA_PATH, PASSWORD, nextDataList);
+  saveData(DATA_PATH, PASSWORD, {
+    items: nextItems,
+    origin: MAIN_ORIGIN,
+    thumbnailOrigins: THUMBNAIL_ORIGINS,
+  });
 }
 
 main();

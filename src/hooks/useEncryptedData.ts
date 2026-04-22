@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { type Data, dataSchema } from "../types/data";
 
 const ALGO = "AES-GCM";
 const SALT_LEN = 16;
@@ -6,13 +7,24 @@ const IV_LEN = 12;
 const KEY_LEN = 32;
 const ITERATIONS = 100000;
 
+export type EncryptState = "idle" | "loading" | "done";
+
 export function useEncryptedData(url: string, password: string) {
-  const [data, setData] = useState<string | null>(null);
+  const [state, setState] = useState<EncryptState>("idle");
+  const [data, setData] = useState<Data | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    async function fetchData() {
+    if (!password) {
+      setState("idle");
+      return;
+    }
+
+    async function fetchData(password: string) {
       try {
+        setState("loading");
+        setError(null);
+
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error(`http error: ${response.status}`);
@@ -23,16 +35,21 @@ export function useEncryptedData(url: string, password: string) {
           new Uint8Array(encryptedData),
         );
 
-        setData(new TextDecoder().decode(decryptedData));
+        const dataText = new TextDecoder().decode(decryptedData);
+        const data = dataSchema.parse(JSON.parse(dataText));
+        setData(data);
+
+        setState("done");
       } catch (err) {
         setError(err instanceof Error ? err : new Error(String(err)));
+        setState("idle");
       }
     }
 
-    fetchData();
+    fetchData(password);
   }, [url, password]);
 
-  return { data, error };
+  return [state, data, error] as const;
 }
 
 async function decrypt(

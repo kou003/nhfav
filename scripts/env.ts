@@ -10,7 +10,12 @@ const WAIT_MS_DEFAULT = 5000; // 5 seconds
 const envSchema = z.object({
   PASSWORD: z.string(),
   API_KEY: z.string(),
-  ENDPOINT: z.url(),
+  API_ENDPOINT: z.url(),
+  MAIN_ORIGIN: z.url(),
+  THUMBNAIL_ORIGINS: z
+    .string()
+    .transform((s) => s.split(","))
+    .pipe(z.array(z.url())),
   DATA_PATH: z.string().default(DATA_PATH_DEFAULT),
   WAIT_MS: z
     .string()

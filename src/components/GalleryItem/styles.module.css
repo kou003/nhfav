@@ -1,0 +1,42 @@
+.gallery {
+  img {
+    object-fit: contain;
+    width: 100%;
+    display: block;
+    border-radius: 3%;
+    height: auto;
+    z-index: 50;
+  }
+
+  figure {
+    position: relative;
+    margin: 0;
+    font-size: 100%;
+    line-height: 1.2em;
+    padding-bottom: 3.6em;
+    overflow: hidden;
+  }
+
+  figcaption {
+    position: absolute;
+    margin: 0;
+    color: var(--text);
+    width: 100%;
+    font-weight: 700;
+    font-size: 1em;
+    background-color: var(--bg-elevated);
+    border-radius: 3%;
+    z-index: 100;
+  }
+}
+
+.gallery:hover {
+  figure {
+    overflow: visible;
+  }
+
+  .caption {
+    max-height: 100%;
+    box-shadow: 0 10px 20px var(--shadow);
+  }
+}

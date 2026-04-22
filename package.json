@@ -13,11 +13,13 @@
     "fix:unsafe": "biome check --write --unsafe",
     "typecheck": "tsc --noEmit",
     "update": "tsx --env-file-if-exists .env scripts/update.ts",
-    "check-data": "tsx --env-file-if-exists .env scripts/check.ts"
+    "tool": "tsx --env-file-if-exists .env scripts/tool.ts"
   },
   "dependencies": {
+    "@types/react-modal": "^3.16.3",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
+    "react-modal": "^3.16.3",
     "zod": "^4.3.6"
   },
   "devDependencies": {
