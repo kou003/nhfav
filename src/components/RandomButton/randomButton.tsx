@@ -1,9 +1,11 @@
 import { faShuffle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSeed } from "@hooks/useSeed";
 import styles from "./styles.module.css";
 
 export function RandomButton() {
-  const seed = getRandom().toString();
+  const currentSeed = useSeed();
+  const seed = currentSeed ^ getRandom();
   const href = `#${seed}`;
   return (
     <a className={styles.randomButton} href={href} rel="noopener">
@@ -13,7 +15,5 @@ export function RandomButton() {
 }
 
 function getRandom() {
-  const array = new Uint32Array(1);
-  crypto.getRandomValues(array);
-  return array[0];
+  return Math.random() * Number.MAX_SAFE_INTEGER;
 }

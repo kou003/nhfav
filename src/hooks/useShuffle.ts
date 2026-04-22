@@ -1,10 +1,6 @@
+import { useSeed } from "@hooks/useSeed";
 import type { Data, DataItem } from "@models/data";
-import { useEffect, useMemo, useState } from "react";
-
-const getCurrentSeed = () => {
-  const num = window.location.hash.match(/\d+/)?.[0] ?? "0";
-  return parseInt(num, 10) || 0;
-};
+import { useMemo } from "react";
 
 function hashInt(key: number, seed: number = 0): number {
   let h = seed ^ key;
@@ -20,14 +16,7 @@ function hashInt(key: number, seed: number = 0): number {
 }
 
 export function useShuffleItems(data: Data | null) {
-  const [seed, setSeed] = useState(getCurrentSeed);
-  useEffect(() => {
-    const handler = () => {
-      setSeed(getCurrentSeed);
-    };
-    window.addEventListener("hashchange", handler);
-    return () => window.removeEventListener("hashchange", handler);
-  }, []);
+  const seed = useSeed();
 
   const shuffleItems = useMemo<DataItem[] | null>(() => {
     if (data === null) return null;
