@@ -10,7 +10,8 @@ import z from "zod";
 
 function App() {
   const [password, setPassword] = useLocalStorage(z.string(), "password", "");
-  const [state, data, error] = useEncryptedData("/data.enc", password);
+  const dataUrl = `${import.meta.env.BASE_URL}data.enc`;
+  const [state, data, error] = useEncryptedData(dataUrl, password);
   const items = useShuffleItems(data);
   return (
     <>
