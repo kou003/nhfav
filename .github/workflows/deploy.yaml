@@ -36,6 +36,8 @@ jobs:
           node-version: 24
       - name: build
         run: npm ci && npm run build
+        env:
+          VITE_BASE_PATH: /${{ github.event.repository.name }}/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
