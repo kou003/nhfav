@@ -10,4 +10,7 @@ export default defineConfig({
       localsConvention: "dashes",
     },
   },
+  resolve: {
+    tsconfigPaths: true,
+  },
 });

@@ -1,4 +1,4 @@
-import type { DataItem } from "../../types/data";
+import type { DataItem } from "@models/data";
 import styles from "./styles.module.css";
 
 type GalleryItemProps = {

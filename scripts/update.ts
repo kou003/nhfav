@@ -1,8 +1,4 @@
-import {
-  type DataList,
-  dataResponseSchema,
-  dataSchema,
-} from "../src/types/data";
+import { type DataList, dataResponseSchema, dataSchema } from "@models/data";
 import { env } from "./env";
 import { delay, loadData, saveData } from "./utils";
 

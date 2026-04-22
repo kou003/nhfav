@@ -1,5 +1,5 @@
-import type { Data } from "../../types/data";
-import { GalleryItem } from "../GalleryItem";
+import { GalleryItem } from "@components/GalleryItem";
+import type { Data } from "@models/data";
 import styles from "./styles.module.css";
 
 type GalleryContainerProps = {

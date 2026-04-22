@@ -1,6 +1,6 @@
+import type { EncryptState } from "@hooks/useEncryptedData";
 import { useState } from "react";
 import Modal from "react-modal";
-import type { EncryptState } from "../../hooks/useEncryptedData";
 import styles from "./styles.module.css";
 
 type PasswordModalProps = {

@@ -1,9 +1,9 @@
+import { GalleryContainer } from "@components/GalleryContainer";
+import { PasswordModal } from "@components/PasswordModal";
+import { useEncryptedData } from "@hooks/useEncryptedData";
+import { useLocalStorage } from "@hooks/useLocalStorage";
 import z from "zod";
-import styles from "./App.module.css";
-import { GalleryContainer } from "./components/GalleryContainer";
-import { PasswordModal } from "./components/PasswordModal";
-import { useEncryptedData } from "./hooks/useEncryptedData";
-import { useLocalStorage } from "./hooks/useLocalStorage";
+import styles from "@/App.module.css";
 
 function App() {
   const [password, setPassword] = useLocalStorage(z.string(), "password", "");

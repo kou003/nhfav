@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { type Data, dataSchema } from "../types/data";
+import { type Data, dataSchema } from "../models/data";
 
 const ALGO = "AES-GCM";
 const SALT_LEN = 16;
