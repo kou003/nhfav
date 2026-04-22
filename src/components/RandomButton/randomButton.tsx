@@ -3,15 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./styles.module.css";
 
 export function RandomButton() {
+  const seed = Math.floor(Math.random() * 10000000).toString();
+  const href = `#${seed}`;
   return (
-    <button
-      type="button"
-      className={styles.randomButton}
-      onClick={() => {
-        window.location.hash = Math.floor(Math.random() * 10000000).toString();
-      }}
-    >
+    <a className={styles.randomButton} href={href} rel="noopener">
       <FontAwesomeIcon icon={faShuffle} />
-    </button>
+    </a>
   );
 }

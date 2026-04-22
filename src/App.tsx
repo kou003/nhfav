@@ -5,11 +5,13 @@ import { PasswordModal } from "@components/PasswordModal";
 import { RandomButton } from "@components/RandomButton/randomButton";
 import { useEncryptedData } from "@hooks/useEncryptedData";
 import { useLocalStorage } from "@hooks/useLocalStorage";
+import { useShuffleItems } from "@hooks/useShuffle";
 import z from "zod";
 
 function App() {
   const [password, setPassword] = useLocalStorage(z.string(), "password", "");
   const [state, data, error] = useEncryptedData("/data.enc", password);
+  const items = useShuffleItems(data);
   return (
     <>
       <Navbar origin={data?.origin} />
@@ -22,7 +24,7 @@ function App() {
           onApply={setPassword}
         />
         <Loading loading={state === "loading"} />
-        <GalleryContainer data={data} />
+        <GalleryContainer data={data} items={items} />
       </section>
     </>
   );
