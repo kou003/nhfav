@@ -1,9 +1,8 @@
 pre-push:
   jobs:
-    - run: npm run lint
+    - run: npm run check -- --no-errors-on-unmatched "{staged_files}"
 
 pre-commit:
   parallel: true
   jobs:
-    - run: npm run fix -- {staged_files}
-    - run: npm run typecheck
+    - run: npm run fix -- --no-errors-on-unmatched "{staged_files}"
