@@ -4,6 +4,7 @@
     "module": "esnext",
     "skipLibCheck": true,
     "paths": {
+      "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@models/*": ["./src/models/*"],

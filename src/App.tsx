@@ -1,24 +1,28 @@
 import { GalleryContainer } from "@components/GalleryContainer";
+import { Loading } from "@components/Loading";
+import { Navbar } from "@components/Navbar";
 import { PasswordModal } from "@components/PasswordModal";
 import { useEncryptedData } from "@hooks/useEncryptedData";
 import { useLocalStorage } from "@hooks/useLocalStorage";
 import z from "zod";
-import styles from "@/App.module.css";
 
 function App() {
   const [password, setPassword] = useLocalStorage(z.string(), "password", "");
   const [state, data, error] = useEncryptedData("/data.enc", password);
   return (
-    <section id="center">
-      <PasswordModal
-        initValue={password}
-        state={state}
-        error={error}
-        onApply={setPassword}
-      />
-      {state === "loading" && <div className={styles.loading}>Loading...</div>}
-      <GalleryContainer data={data} />
-    </section>
+    <>
+      <Navbar origin={data?.origin} />
+      <section id="center">
+        <PasswordModal
+          initValue={password}
+          state={state}
+          error={error}
+          onApply={setPassword}
+        />
+        <Loading loading={state === "loading"} />
+        <GalleryContainer data={data} />
+      </section>
+    </>
   );
 }
 

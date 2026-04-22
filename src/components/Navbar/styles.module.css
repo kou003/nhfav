@@ -1,0 +1,45 @@
+.navbar {
+  background: var(--nav-bg);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  flex-basis: 66px;
+  flex-shrink: 0;
+  width: 66px;
+}
+
+.search {
+  flex-grow: 1;
+  max-width: 300px;
+  display: flex;
+
+  input {
+    flex-grow: 1;
+    width: 100%;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    padding: 0 1em;
+  }
+
+  button {
+    height: 40px;
+    width: 40px;
+    background: var(--accent);
+    border: none;
+    border-radius: 0 5px 5px 0;
+  }
+
+  button:disabled {
+    background: var(--accent-dark);
+  }
+}
