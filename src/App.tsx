@@ -6,6 +6,7 @@ import { RandomButton } from "@components/RandomButton/randomButton";
 import { useEncryptedData } from "@hooks/useEncryptedData";
 import { useLocalStorage } from "@hooks/useLocalStorage";
 import { useShuffleItems } from "@hooks/useShuffle";
+import { useThumbnailOriginConfig } from "@hooks/useThumbnailOriginConfig";
 import { ScrollRestoration } from "react-router-dom";
 import z from "zod";
 
@@ -19,12 +20,24 @@ function App() {
     commitVersion,
   );
   const items = useShuffleItems(data);
+  const {
+    thumbnailOriginCandidates,
+    selectedThumbnailOrigin,
+    selectThumbnailOrigin,
+  } = useThumbnailOriginConfig(data);
+
   return (
     <>
       <ScrollRestoration
         getKey={(location) => `${location.pathname}${location.search}`}
       />
-      <Navbar origin={data?.origin} commitVersion={commitVersion} />
+      <Navbar
+        origin={data?.origin}
+        commitVersion={commitVersion}
+        thumbnailOriginCandidates={thumbnailOriginCandidates}
+        selectedThumbnailOrigin={selectedThumbnailOrigin}
+        onSelectThumbnailOrigin={selectThumbnailOrigin}
+      />
       <RandomButton />
       <section id="center">
         <PasswordModal
@@ -34,7 +47,11 @@ function App() {
           onApply={setPassword}
         />
         <Loading loading={state === "loading"} />
-        <GalleryContainer data={data} items={items} />
+        <GalleryContainer
+          data={data}
+          items={items}
+          thumbnailOrigin={selectedThumbnailOrigin}
+        />
       </section>
     </>
   );

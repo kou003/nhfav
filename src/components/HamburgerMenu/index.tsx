@@ -5,10 +5,28 @@ import styles from "./styles.module.css";
 
 type HamburgerMenuProps = {
   commitVersion: string;
+  thumbnailOriginCandidates: string[];
+  selectedThumbnailOrigin: string;
+  onSelectThumbnailOrigin: (origin: string) => void;
 };
 
-export function HamburgerMenu({ commitVersion }: HamburgerMenuProps) {
+function getOriginLabel(origin: string) {
+  try {
+    const parsed = new URL(origin);
+    return `${parsed.host}${parsed.pathname === "/" ? "" : parsed.pathname}`;
+  } catch {
+    return origin;
+  }
+}
+
+export function HamburgerMenu({
+  commitVersion,
+  thumbnailOriginCandidates,
+  selectedThumbnailOrigin,
+  onSelectThumbnailOrigin,
+}: HamburgerMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isConfigOpen, setIsConfigOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -48,6 +66,37 @@ export function HamburgerMenu({ commitVersion }: HamburgerMenuProps) {
       </button>
       {isOpen && (
         <div className={styles.menu}>
+          <button
+            type="button"
+            className={styles.menuItem}
+            onClick={() => setIsConfigOpen((prev) => !prev)}
+          >
+            config
+          </button>
+          {isConfigOpen && (
+            <div className={styles.configPanel}>
+              <label
+                className={styles.optionLabel}
+                htmlFor="thumbnail-origin-select"
+              >
+                thumbnail origin
+              </label>
+              <select
+                id="thumbnail-origin-select"
+                className={styles.select}
+                value={selectedThumbnailOrigin}
+                onChange={(event) =>
+                  onSelectThumbnailOrigin(event.target.value)
+                }
+              >
+                {thumbnailOriginCandidates.map((origin) => (
+                  <option key={origin} value={origin}>
+                    {getOriginLabel(origin)}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
           <button type="button" className={styles.menuItem}>
             menu1
           </button>

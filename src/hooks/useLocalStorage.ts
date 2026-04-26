@@ -1,6 +1,8 @@
 import { useCallback, useState } from "react";
 import type { z } from "zod";
 
+type SetValueAction<T> = T | ((prev: T) => T);
+
 export function useLocalStorage<T>(
   schema: z.ZodType<T>,
   key: string,
@@ -17,10 +19,13 @@ export function useLocalStorage<T>(
   });
 
   const setValue = useCallback(
-    (value: T) => {
+    (action: SetValueAction<T>) => {
       try {
-        setStoredValue(value);
-        window.localStorage.setItem(key, JSON.stringify(value));
+        setStoredValue((prev) => {
+          const next = action instanceof Function ? action(prev) : action;
+          window.localStorage.setItem(key, JSON.stringify(next));
+          return next;
+        });
       } catch (error) {
         console.error(`Error setting localStorage key "${key}":`, error);
       }

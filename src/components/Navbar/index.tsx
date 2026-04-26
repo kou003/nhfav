@@ -7,9 +7,18 @@ import styles from "./styles.module.css";
 type NavbarProps = {
   origin?: string;
   commitVersion: string;
+  thumbnailOriginCandidates: string[];
+  selectedThumbnailOrigin: string;
+  onSelectThumbnailOrigin: (origin: string) => void;
 };
 
-export function Navbar({ origin, commitVersion }: NavbarProps) {
+export function Navbar({
+  origin,
+  commitVersion,
+  thumbnailOriginCandidates,
+  selectedThumbnailOrigin,
+  onSelectThumbnailOrigin,
+}: NavbarProps) {
   const logoUrl = origin ? `${origin}/logo.svg` : logo;
   return (
     <nav className={styles.navbar}>
@@ -28,7 +37,12 @@ export function Navbar({ origin, commitVersion }: NavbarProps) {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
       </form>
-      <HamburgerMenu commitVersion={commitVersion} />
+      <HamburgerMenu
+        commitVersion={commitVersion}
+        thumbnailOriginCandidates={thumbnailOriginCandidates}
+        selectedThumbnailOrigin={selectedThumbnailOrigin}
+        onSelectThumbnailOrigin={onSelectThumbnailOrigin}
+      />
     </nav>
   );
 }

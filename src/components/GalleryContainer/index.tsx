@@ -5,21 +5,26 @@ import styles from "./styles.module.css";
 type GalleryContainerProps = {
   data: Data | null;
   items: DataItem[] | null;
+  thumbnailOrigin: string;
 };
 
-export function GalleryContainer({ data, items }: GalleryContainerProps) {
+export function GalleryContainer({
+  data,
+  items,
+  thumbnailOrigin,
+}: GalleryContainerProps) {
   return (
     <div className={styles.galleryContainer}>
       {data &&
-        items?.map((item, index) => {
+        thumbnailOrigin &&
+        items?.map((item) => {
           const key = item.id;
-          const tidx = index % data.thumbnailOrigins.length;
           return (
             <GalleryItem
               key={key}
               item={item}
               origin={data.origin}
-              thumbnailOrigin={data.thumbnailOrigins[tidx]}
+              thumbnailOrigin={thumbnailOrigin}
             />
           );
         })}
