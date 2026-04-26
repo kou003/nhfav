@@ -84,6 +84,13 @@ export function HamburgerMenu({
             selected={selectedThumbnailOrigin}
             onSelect={onSelectThumbnailOrigin}
           />
+          <Link
+            to="https://github.com/kou003/nhfav/actions/workflows/update.yaml"
+            className={styles.menuItem}
+            target="_blank"
+          >
+            Update Workflow
+          </Link>
           <hr className={styles.divider} />
           <div className={styles.commit} title={`commit: ${commitVersion}`}>
             build {commitVersion}
