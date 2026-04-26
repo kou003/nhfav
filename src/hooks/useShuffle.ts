@@ -4,14 +4,14 @@ import { useMemo } from "react";
 
 function hashInt(key: number, seed: number = 0): number {
   let h = seed ^ key;
-  // MurmurHash3 のファイナライザ（ミキシング関数）を利用
+  // Use MurmurHash3 finalizer (mixing function)
   h ^= h >>> 16;
   h = Math.imul(h, 0x85ebca6b);
   h ^= h >>> 13;
   h = Math.imul(h, 0xc2b2ae35);
   h ^= h >>> 16;
 
-  // 符号なし32ビット整数として返す
+  // return as unsigned 32-bit integer
   return h >>> 0;
 }
 
