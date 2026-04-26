@@ -21,6 +21,7 @@ export function useShuffleItems(data: Data | null) {
   const shuffleItems = useMemo<DataItem[] | null>(() => {
     if (data === null) return null;
     if (seed === 0) return data.items;
+    if (seed === 1) return data.items.toReversed();
     return data.items.toSorted(
       (a, b) => hashInt(a.id, seed) - hashInt(b.id, seed),
     );
