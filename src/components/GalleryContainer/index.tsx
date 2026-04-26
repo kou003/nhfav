@@ -6,12 +6,14 @@ type GalleryContainerProps = {
   data: Data | null;
   items: DataItem[] | null;
   thumbnailOrigin: string;
+  openInNewTab: boolean;
 };
 
 export function GalleryContainer({
   data,
   items,
   thumbnailOrigin,
+  openInNewTab,
 }: GalleryContainerProps) {
   return (
     <div className={styles.galleryContainer}>
@@ -25,6 +27,7 @@ export function GalleryContainer({
               item={item}
               origin={data.origin}
               thumbnailOrigin={thumbnailOrigin}
+              openInNewTab={openInNewTab}
             />
           );
         })}

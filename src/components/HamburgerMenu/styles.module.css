@@ -48,6 +48,9 @@
 }
 
 .menuItem {
+  box-sizing: border-box;
+  display: block;
+  font-size: 1rem;
   width: 100%;
   text-align: left;
   border: none;
@@ -62,35 +65,8 @@
   background: var(--bg-elevated);
 }
 
-.configPanel {
-  margin: 4px 0 8px;
-  padding: 6px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--bg-raised);
-  display: grid;
-  gap: 6px;
-}
-
-.optionLabel {
-  padding: 2px 4px;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-
-.select {
-  width: 100%;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  padding: 8px;
-  font-size: 0.85rem;
-}
-
-.select:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
+.toggleMenuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

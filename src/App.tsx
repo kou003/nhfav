@@ -5,6 +5,7 @@ import { PasswordModal } from "@components/PasswordModal";
 import { RandomButton } from "@components/RandomButton/randomButton";
 import { useEncryptedData } from "@hooks/useEncryptedData";
 import { useLocalStorage } from "@hooks/useLocalStorage";
+import { useOpenInNewTab } from "@hooks/useOpenInNewTab";
 import { useShuffleItems } from "@hooks/useShuffle";
 import { useThumbnailOriginConfig } from "@hooks/useThumbnailOriginConfig";
 import { ScrollRestoration } from "react-router-dom";
@@ -25,6 +26,7 @@ function App() {
     selectedThumbnailOrigin,
     selectThumbnailOrigin,
   } = useThumbnailOriginConfig(data);
+  const { openInNewTab, setOpenInNewTab } = useOpenInNewTab();
 
   return (
     <>
@@ -37,6 +39,8 @@ function App() {
         thumbnailOriginCandidates={thumbnailOriginCandidates}
         selectedThumbnailOrigin={selectedThumbnailOrigin}
         onSelectThumbnailOrigin={selectThumbnailOrigin}
+        openInNewTab={openInNewTab}
+        onToggleOpenInNewTab={setOpenInNewTab}
       />
       <RandomButton />
       <section id="center">
@@ -51,6 +55,7 @@ function App() {
           data={data}
           items={items}
           thumbnailOrigin={selectedThumbnailOrigin}
+          openInNewTab={openInNewTab}
         />
       </section>
     </>
