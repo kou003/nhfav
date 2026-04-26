@@ -1,6 +1,6 @@
+import { execSync } from "node:child_process";
 import babel from "@rolldown/plugin-babel";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
-import { execSync } from "node:child_process";
 import { defineConfig } from "vite";
 
 function getCommitVersion() {

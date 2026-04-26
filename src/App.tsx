@@ -6,6 +6,7 @@ import { RandomButton } from "@components/RandomButton/randomButton";
 import { useEncryptedData } from "@hooks/useEncryptedData";
 import { useLocalStorage } from "@hooks/useLocalStorage";
 import { useShuffleItems } from "@hooks/useShuffle";
+import { ScrollRestoration } from "react-router-dom";
 import z from "zod";
 
 function App() {
@@ -20,6 +21,9 @@ function App() {
   const items = useShuffleItems(data);
   return (
     <>
+      <ScrollRestoration
+        getKey={(location) => `${location.pathname}${location.search}`}
+      />
       <Navbar origin={data?.origin} commitVersion={commitVersion} />
       <RandomButton />
       <section id="center">

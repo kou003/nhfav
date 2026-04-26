@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 
-const getCurrentSeed = () => {
-  const query = new URLSearchParams(window.location.search);
-  const num = query.get("s")?.match(/\d+/)?.[0] ?? "0";
+function parseSeed(seedValue: string | null): number {
+  const num = seedValue?.match(/\d+/)?.[0] ?? "0";
   return parseInt(num, 10) || 0;
-};
+}
 
 export function useSeed() {
-  const [seed, _] = useState(getCurrentSeed);
+  const [searchParams] = useSearchParams();
+  const seedValue = searchParams.get("s");
+  const seed = useMemo(() => parseSeed(seedValue), [seedValue]);
   return seed;
 }
