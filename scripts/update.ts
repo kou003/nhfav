@@ -10,11 +10,21 @@ const {
   THUMBNAIL_ORIGINS,
   DATA_PATH,
   WAIT_MS,
+  WORKFLOW_TOKEN,
+  REPOSITORY,
 } = env;
 
 async function main() {
+  const isFullUpdate = process.argv.includes("--full");
+  if (isFullUpdate) {
+    console.log("Performing full update...");
+  } else {
+    console.log("Performing incremental update...");
+  }
+
   const prevData =
-    dataSchema.safeParse(loadData(DATA_PATH, PASSWORD)).data ??
+    (!isFullUpdate &&
+      dataSchema.safeParse(loadData(DATA_PATH, PASSWORD)).data) ||
     dataSchema.parse({});
   const existIds = new Set(prevData.items.map((item) => item.id));
 
@@ -80,6 +90,8 @@ async function main() {
     items: nextItems,
     origin: MAIN_ORIGIN,
     thumbnailOrigins: THUMBNAIL_ORIGINS,
+    repository: REPOSITORY,
+    workflowToken: WORKFLOW_TOKEN,
   });
 }
 

@@ -19,6 +19,8 @@ export const dataSchema = z.object({
   items: z.array(itemSchema),
   origin: z.url().default("http://example.com"),
   thumbnailOrigins: z.array(z.url()).min(1).default(["http://example.com"]),
+  repository: z.string().default(""),
+  workflowToken: z.string().default(""),
 });
 
 export type Data = z.infer<typeof dataSchema>;

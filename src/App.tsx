@@ -41,6 +41,8 @@ function App() {
         onSelectThumbnailOrigin={selectThumbnailOrigin}
         openInNewTab={openInNewTab}
         onToggleOpenInNewTab={setOpenInNewTab}
+        repository={data?.repository ?? ""}
+        workflowToken={data?.workflowToken ?? ""}
       />
       <RandomButton />
       <section id="center">

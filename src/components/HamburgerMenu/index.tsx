@@ -1,5 +1,6 @@
 import { OpenInNewTabToggleMenuItem } from "@components/OpenInNewTabToggleMenuItem";
 import { ThumbnailOriginSelectMenuItem } from "@components/ThumbnailOriginSelectMenuItem";
+import { UpdateButton } from "@components/UpdateButton";
 import {
   faArrowDownWideShort,
   faArrowUpWideShort,
@@ -17,6 +18,8 @@ type HamburgerMenuProps = {
   onSelectThumbnailOrigin: (origin: string) => void;
   openInNewTab: boolean;
   onToggleOpenInNewTab: (checked: boolean) => void;
+  repository: string;
+  workflowToken: string;
 };
 
 export function HamburgerMenu({
@@ -26,6 +29,8 @@ export function HamburgerMenu({
   onSelectThumbnailOrigin,
   openInNewTab,
   onToggleOpenInNewTab,
+  repository,
+  workflowToken,
 }: HamburgerMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -84,13 +89,11 @@ export function HamburgerMenu({
             selected={selectedThumbnailOrigin}
             onSelect={onSelectThumbnailOrigin}
           />
-          <Link
-            to="https://github.com/kou003/nhfav/actions/workflows/update.yaml"
-            className={styles.menuItem}
-            target="_blank"
-          >
-            Update Workflow
-          </Link>
+          <UpdateButton
+            className={`${styles.menuItem} ${styles.updateButton}`}
+            repository={repository}
+            workflowToken={workflowToken}
+          />
           <hr className={styles.divider} />
           <div className={styles.commit} title={`commit: ${commitVersion}`}>
             build {commitVersion}

@@ -21,6 +21,8 @@ const envSchema = z.object({
     .string()
     .transform((str) => parseInt(str, 10))
     .default(WAIT_MS_DEFAULT),
+  WORKFLOW_TOKEN: z.string(),
+  REPOSITORY: z.string(),
 });
 
 export const env = envSchema.parse(process.env);

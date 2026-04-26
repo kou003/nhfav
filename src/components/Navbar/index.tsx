@@ -12,6 +12,8 @@ type NavbarProps = {
   onSelectThumbnailOrigin: (origin: string) => void;
   openInNewTab: boolean;
   onToggleOpenInNewTab: (checked: boolean) => void;
+  repository: string;
+  workflowToken: string;
 };
 
 export function Navbar({
@@ -22,6 +24,8 @@ export function Navbar({
   onSelectThumbnailOrigin,
   openInNewTab,
   onToggleOpenInNewTab,
+  repository,
+  workflowToken,
 }: NavbarProps) {
   const logoUrl = origin ? `${origin}/logo.svg` : logo;
   return (
@@ -52,6 +56,8 @@ export function Navbar({
         onSelectThumbnailOrigin={onSelectThumbnailOrigin}
         openInNewTab={openInNewTab}
         onToggleOpenInNewTab={onToggleOpenInNewTab}
+        repository={repository}
+        workflowToken={workflowToken}
       />
     </nav>
   );

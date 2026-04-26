@@ -1,9 +1,9 @@
-name: update data
+name: update full data
 
 on:
   workflow_dispatch:
   repository_dispatch:
-    types: [update]
+    types: [update-full]
 
 permissions:
   contents: write
@@ -38,7 +38,7 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add -A
           if ! git diff --cached --quiet; then
-            git commit -m 'Update data'
+            git commit -m 'Update full data'
             git push
           else
             echo "No changes to commit"

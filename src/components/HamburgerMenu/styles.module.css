@@ -65,6 +65,15 @@
   background: var(--bg-elevated);
 }
 
+.updateButton {
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.updateButton:hover {
+  color: var(--text-bright);
+  background: color-mix(in srgb, var(--accent) 14%, var(--bg-elevated));
+}
+
 .toggleMenuItem {
   display: flex;
   align-items: center;

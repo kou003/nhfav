@@ -13,6 +13,7 @@
     "fix:unsafe": "biome check --write --unsafe",
     "typecheck": "tsc --noEmit",
     "update": "tsx --tsconfig tsconfig.node.json --env-file-if-exists .env scripts/update.ts",
+    "update:full": "tsx --tsconfig tsconfig.node.json --env-file-if-exists .env scripts/update.ts --full",
     "tool": "tsx --tsconfig tsconfig.node.json --env-file-if-exists .env scripts/tool.ts"
   },
   "dependencies": {
