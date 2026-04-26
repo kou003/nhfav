@@ -1,4 +1,5 @@
 import logo from "@assets/logo.svg";
+import { HamburgerMenu } from "@components/HamburgerMenu";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./styles.module.css";
@@ -27,9 +28,7 @@ export function Navbar({ origin, commitVersion }: NavbarProps) {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
       </form>
-      <small className={styles.commit} title={`commit: ${commitVersion}`}>
-        {commitVersion}
-      </small>
+      <HamburgerMenu commitVersion={commitVersion} />
     </nav>
   );
 }

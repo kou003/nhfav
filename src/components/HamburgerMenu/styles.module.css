@@ -1,0 +1,63 @@
+.container {
+  position: relative;
+  margin-right: 0.75rem;
+}
+
+.iconButton {
+  height: 40px;
+  width: 40px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+.iconButton:hover {
+  background: var(--accent-hover);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 220px;
+  padding: 8px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 10px 40px var(--shadow);
+  z-index: 1000;
+}
+
+.commit {
+  padding: 6px 10px 2px;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-family:
+    "SF Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 4px 0 8px;
+}
+
+.menuItem {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  border-radius: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.menuItem:hover {
+  background: var(--bg-elevated);
+}
