@@ -4,9 +4,9 @@ import { useSeed } from "@hooks/useSeed";
 import styles from "./styles.module.css";
 
 export function RandomButton() {
-  const currentSeed = useSeed();
-  const seed = currentSeed ^ getRandom();
-  const href = `#${seed}`;
+  useSeed();
+  const seed = getRandom();
+  const href = `?s=${seed}`;
   return (
     <a className={styles.randomButton} href={href} rel="noopener">
       <FontAwesomeIcon icon={faShuffle} />
@@ -15,5 +15,5 @@ export function RandomButton() {
 }
 
 function getRandom() {
-  return Math.random() * Number.MAX_SAFE_INTEGER;
+  return Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
 }
