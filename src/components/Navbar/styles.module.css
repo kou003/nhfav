@@ -50,3 +50,12 @@
     background: var(--accent-dark);
   }
 }
+
+.commit {
+  margin-left: auto;
+  margin-right: 0.75rem;
+  color: #666;
+  font-size: 0.7rem;
+  font-family: "SF Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo,
+    monospace;
+}

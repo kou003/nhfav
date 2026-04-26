@@ -9,13 +9,18 @@ import { useShuffleItems } from "@hooks/useShuffle";
 import z from "zod";
 
 function App() {
+  const commitVersion = __APP_COMMIT_VERSION__;
   const [password, setPassword] = useLocalStorage(z.string(), "password", "");
   const dataUrl = `${import.meta.env.BASE_URL}data.enc`;
-  const [state, data, error] = useEncryptedData(dataUrl, password);
+  const [state, data, error] = useEncryptedData(
+    dataUrl,
+    password,
+    commitVersion,
+  );
   const items = useShuffleItems(data);
   return (
     <>
-      <Navbar origin={data?.origin} />
+      <Navbar origin={data?.origin} commitVersion={commitVersion} />
       <RandomButton />
       <section id="center">
         <PasswordModal

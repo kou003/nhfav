@@ -5,9 +5,10 @@ import styles from "./styles.module.css";
 
 type NavbarProps = {
   origin?: string;
+  commitVersion: string;
 };
 
-export function Navbar({ origin }: NavbarProps) {
+export function Navbar({ origin, commitVersion }: NavbarProps) {
   const logoUrl = origin ? `${origin}/logo.svg` : logo;
   return (
     <nav className={styles.navbar}>
@@ -26,6 +27,9 @@ export function Navbar({ origin }: NavbarProps) {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
       </form>
+      <small className={styles.commit} title={`commit: ${commitVersion}`}>
+        {commitVersion}
+      </small>
     </nav>
   );
 }
