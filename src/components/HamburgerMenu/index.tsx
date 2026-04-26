@@ -1,8 +1,8 @@
 import { OpenInNewTabToggleMenuItem } from "@components/OpenInNewTabToggleMenuItem";
 import { ThumbnailOriginSelectMenuItem } from "@components/ThumbnailOriginSelectMenuItem";
 import {
-  faArrowDownShortWide,
   faArrowDownWideShort,
+  faArrowUpWideShort,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -71,7 +71,7 @@ export function HamburgerMenu({
             <FontAwesomeIcon icon={faArrowDownWideShort} /> Newer
           </Link>
           <Link to="?s=1" className={styles.menuItem}>
-            <FontAwesomeIcon icon={faArrowDownShortWide} /> Older
+            <FontAwesomeIcon icon={faArrowUpWideShort} /> Older
           </Link>
           <OpenInNewTabToggleMenuItem
             className={`${styles.menuItem} ${styles.toggleMenuItem}`}
