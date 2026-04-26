@@ -4,9 +4,7 @@ import { createHashRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App.tsx";
 
-const router = createHashRouter([{ path: "*", element: <App /> }], {
-  basename: import.meta.env.BASE_URL,
-});
+const router = createHashRouter([{ path: "*", element: <App /> }]);
 
 // biome-ignore lint/style/noNonNullAssertion: tmp
 createRoot(document.getElementById("root")!).render(
