@@ -131,10 +131,22 @@ async function decrypt(
       new Uint8Array([...ciphertext, ...tag]),
     );
 
-    return new Uint8Array(decrypted);
+    return ungzip(decrypted);
   } catch (err) {
     throw new Error("Decryption failed", {
       cause: err instanceof Error ? err : new Error(String(err)),
     });
   }
+}
+
+async function ungzip(data: ArrayBuffer): Promise<Uint8Array> {
+  if (typeof DecompressionStream === "undefined") {
+    throw new Error("Gzip decompression is not supported in this browser");
+  }
+
+  const stream = new Blob([data])
+    .stream()
+    .pipeThrough(new DecompressionStream("gzip"));
+  const decompressed = await new Response(stream).arrayBuffer();
+  return new Uint8Array(decompressed);
 }
