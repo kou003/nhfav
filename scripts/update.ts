@@ -1,4 +1,10 @@
-import { type DataList, dataResponseSchema, dataSchema } from "@models/data";
+import util from "node:util";
+import {
+  type Data,
+  type DataList,
+  dataResponseSchema,
+  dataSchema,
+} from "@models/data";
 import { env } from "./env";
 import { delay, loadData, saveData } from "./utils";
 
@@ -86,13 +92,20 @@ async function main() {
 
   nextItems.push(...prevData.items);
 
-  saveData(DATA_PATH, PASSWORD, {
+  const newData = {
     items: nextItems,
     origin: MAIN_ORIGIN,
     thumbnailOrigins: THUMBNAIL_ORIGINS,
     repository: REPOSITORY,
     workflowToken: WORKFLOW_TOKEN,
-  });
+  } satisfies Data;
+
+  if (util.isDeepStrictEqual(newData, prevData)) {
+    console.log("No changes detected. Data is up to date.");
+    return;
+  }
+
+  saveData<Data>(DATA_PATH, PASSWORD, newData);
 }
 
 main();
